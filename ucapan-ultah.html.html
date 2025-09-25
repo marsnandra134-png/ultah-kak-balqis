@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Ultah Ala WhatsApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #ece5dd;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .chat-box {
+      background: #fff;
+      width: 360px;
+      height: 600px;
+      display: flex;
+      flex-direction: column;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+    .header {
+      background: #075e54;
+      color: white;
+      padding: 12px;
+      font-weight: bold;
+    }
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background: #ece5dd;
+    }
+    .bubble {
+      padding: 10px 14px;
+      border-radius: 16px;
+      max-width: 70%;
+      word-wrap: break-word;
+      font-size: 14px;
+    }
+    .me {
+      background: #dcf8c6;
+      align-self: flex-end;
+      border-bottom-right-radius: 4px;
+    }
+    .friend {
+      background: #fff;
+      align-self: flex-start;
+      border-bottom-left-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-box">
+    <div class="header">Iqis 🎂</div>
+    <div class="messages" id="messages">
+      <div class="bubble me">Halo Kak Iqis 👋</div>
+      <div class="bubble me">Hmm... ada yang spesial nggak ya hari ini? 🤔</div>
+    </div>
+  </div>
+
+  <script>
+    const messages = document.getElementById("messages");
+
+    // isi balasan otomatis
+    const replies = [
+      "OHHH... ternyata hari ini ulang tahunmu! 🥳",
+      "Semoga panjang umur 🎉",
+      "Selalu sehat dan bahagia 💖",
+      "Sukses di setiap langkahmu 🚀",
+      "Banyak rezeki dan keberkahan ✨",
+      "Jangan gamon 😆",
+      "Dari tumbal curhatmu 🤪"
+    ];
+
+    let index = 0;
+
+    function addMessage(text, sender) {
+      const bubble = document.createElement("div");
+      bubble.className = `bubble ${sender}`;
+      bubble.textContent = text;
+      messages.appendChild(bubble);
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    // auto jalankan chat
+    function autoChat() {
+      if (index < replies.length) {
+        setTimeout(() => {
+          addMessage(replies[index], "friend");
+          index++;
+          autoChat();
+        }, 1500);
+      }
+    }
+
+    // mulai auto chat
+    autoChat();
+  </script>
+</body>
+</html>
